@@ -6,9 +6,18 @@ const appConfig=require('./config/appConfig');
 const fs=require('fs')
 
 const mongoose=require('mongoose')
+
+//const cookieParser=require('cookie-parser');
+const bodyParser=require('body-parser')
+const cookieParser=require('cookie-parser')
 //declaring an instance or creating an application intsance
 const app=express()
 
+
+//middlewares
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:false}))
+app.use(cookieParser())
 
 //Bootstrap route
 let routesPath='./routes'
@@ -20,6 +29,16 @@ fs.readdirSync(routesPath).forEach(function (file){
         route.setRouter(app)
     }
 });
+
+
+//Bootstrap  Model
+let modelPath='./models'
+fs.readdirSync(modelPath).forEach(function (file){
+    if(file.indexOf('.js')) require(modelPath+'/'+file)
+})
+
+
+//
 
 let HelloWorldFunction=(req,res)=>res.send('hello world progra')
 
@@ -33,20 +52,25 @@ app.listen(appConfig.port,()=>
     console.log(`example app listening on port ${appConfig.port}`);
 
     //creating mongo db connection here
-   let db=mongoose.connect(appConfig.db.uri,{ useNewUrlParser: true });
+
+    
+   let db=mongoose.connect(appConfig.db.uri,{useNewUrlParser: true});
+
+   
+  
 
 })
 
-/*
+
 //handling the mongoose connection error event
-mongoose.connect.on('error',function(err){
+mongoose.connection.on('error',function(err){
     console.log('database connection error');
     console.log(err)
 })
 
 //handling the mongoose connection success event
 mongoose.connection.on('open',function(err){
-    if(erro){
+    if(err){
     console.log('databasde error');
     console.log(err);
 } else {
@@ -54,4 +78,3 @@ mongoose.connection.on('open',function(err){
 
 }
 })
-*/
