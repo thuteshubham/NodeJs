@@ -19,6 +19,15 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(cookieParser())
 
+
+
+//Bootstrap  Model
+let modelsPath='./models'
+fs.readdirSync(modelsPath).forEach(function (file){
+    if(~file.indexOf('.js')) require(modelsPath+'/'+file)
+})
+
+
 //Bootstrap route
 let routesPath='./routes'
 fs.readdirSync(routesPath).forEach(function (file){
@@ -31,23 +40,12 @@ fs.readdirSync(routesPath).forEach(function (file){
 });
 
 
-//Bootstrap  Model
-let modelPath='./models'
-fs.readdirSync(modelPath).forEach(function (file){
-    if(file.indexOf('.js')) require(modelPath+'/'+file)
-})
 
 
-//
-
-let HelloWorldFunction=(req,res)=>res.send('hello world progra')
-
-//first parameter is route and second one is myHelloWorld
-app.get('/hello',HelloWorldFunction);
 
 
 //listening the server
-app.listen(appConfig.port,()=>
+app.listen(appConfig.port, ()=>
 {
     console.log(`example app listening on port ${appConfig.port}`);
 
