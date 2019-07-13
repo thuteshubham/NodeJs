@@ -1,0 +1,17 @@
+{
+  "name": "Blog application",
+  "version": "0.0.1",
+  "description": "Very small REST API for blog",
+  "desciption": "Documentation for blog app",
+  "title": "Blog APIs",
+  "url": "http://127.0.0.1:3000",
+  "sampleUrl": false,
+  "defaultVersion": "0.0.0",
+  "apidoc": "0.3.0",
+  "generator": {
+    "name": "apidoc",
+    "time": "2019-07-07T05:47:01.060Z",
+    "url": "http://apidocjs.com",
+    "version": "0.17.7"
+  }
+}

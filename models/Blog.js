@@ -1,4 +1,4 @@
-// importing mongoose moduleS
+// importing mongoose module
 const mongoose = require('mongoose')
 // import schema 
 const Schema = mongoose.Schema;
@@ -50,8 +50,5 @@ let blogSchema = new Schema(
         }
     }
 )
-
-
-//exporting part mongoose will export implicitly
 
 mongoose.model('Blog', blogSchema);
